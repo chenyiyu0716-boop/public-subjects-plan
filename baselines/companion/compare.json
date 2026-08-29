@@ -1,0 +1,226 @@
+{
+  "comparison_rows": [
+    {
+      "case_id": "CMP02-D1-01",
+      "qwen_local_1_5b_failed": false,
+      "qwen_local_7b_failed": true,
+      "deepseek_v4_flash_failed": false,
+      "stepfun_3_5_flash_failed": false,
+      "glm_5_2_bailian_failed": false,
+      "kimi_k2_5_bailian_failed": false,
+      "minimax_m2_5_bailian_failed": false
+    },
+    {
+      "case_id": "CMP02-D1-02",
+      "qwen_local_1_5b_failed": false,
+      "qwen_local_7b_failed": false,
+      "deepseek_v4_flash_failed": false,
+      "stepfun_3_5_flash_failed": false,
+      "glm_5_2_bailian_failed": false,
+      "kimi_k2_5_bailian_failed": false,
+      "minimax_m2_5_bailian_failed": false
+    },
+    {
+      "case_id": "CMP02-D2-01",
+      "qwen_local_1_5b_failed": false,
+      "qwen_local_7b_failed": false,
+      "deepseek_v4_flash_failed": false,
+      "stepfun_3_5_flash_failed": false,
+      "glm_5_2_bailian_failed": false,
+      "kimi_k2_5_bailian_failed": false,
+      "minimax_m2_5_bailian_failed": false
+    },
+    {
+      "case_id": "CMP02-D2-02",
+      "qwen_local_1_5b_failed": false,
+      "qwen_local_7b_failed": false,
+      "deepseek_v4_flash_failed": false,
+      "stepfun_3_5_flash_failed": false,
+      "glm_5_2_bailian_failed": false,
+      "kimi_k2_5_bailian_failed": true,
+      "minimax_m2_5_bailian_failed": false
+    },
+    {
+      "case_id": "CMP02-D3-01",
+      "qwen_local_1_5b_failed": true,
+      "qwen_local_7b_failed": false,
+      "deepseek_v4_flash_failed": false,
+      "stepfun_3_5_flash_failed": false,
+      "glm_5_2_bailian_failed": false,
+      "kimi_k2_5_bailian_failed": false,
+      "minimax_m2_5_bailian_failed": false
+    },
+    {
+      "case_id": "CMP02-D3-02",
+      "qwen_local_1_5b_failed": true,
+      "qwen_local_7b_failed": true,
+      "deepseek_v4_flash_failed": false,
+      "stepfun_3_5_flash_failed": false,
+      "glm_5_2_bailian_failed": false,
+      "kimi_k2_5_bailian_failed": false,
+      "minimax_m2_5_bailian_failed": false
+    },
+    {
+      "case_id": "CMP02-D4-01",
+      "qwen_local_1_5b_failed": false,
+      "qwen_local_7b_failed": false,
+      "deepseek_v4_flash_failed": false,
+      "stepfun_3_5_flash_failed": false,
+      "glm_5_2_bailian_failed": false,
+      "kimi_k2_5_bailian_failed": false,
+      "minimax_m2_5_bailian_failed": false
+    },
+    {
+      "case_id": "CMP02-D4-02",
+      "qwen_local_1_5b_failed": false,
+      "qwen_local_7b_failed": false,
+      "deepseek_v4_flash_failed": false,
+      "stepfun_3_5_flash_failed": false,
+      "glm_5_2_bailian_failed": false,
+      "kimi_k2_5_bailian_failed": false,
+      "minimax_m2_5_bailian_failed": false
+    },
+    {
+      "case_id": "CMP02-D5-01",
+      "qwen_local_1_5b_failed": true,
+      "qwen_local_7b_failed": false,
+      "deepseek_v4_flash_failed": false,
+      "stepfun_3_5_flash_failed": false,
+      "glm_5_2_bailian_failed": false,
+      "kimi_k2_5_bailian_failed": false,
+      "minimax_m2_5_bailian_failed": true
+    },
+    {
+      "case_id": "CMP02-D5-02",
+      "qwen_local_1_5b_failed": false,
+      "qwen_local_7b_failed": false,
+      "deepseek_v4_flash_failed": false,
+      "stepfun_3_5_flash_failed": false,
+      "glm_5_2_bailian_failed": false,
+      "kimi_k2_5_bailian_failed": false,
+      "minimax_m2_5_bailian_failed": false
+    },
+    {
+      "case_id": "CMP02-D6-01",
+      "qwen_local_1_5b_failed": false,
+      "qwen_local_7b_failed": false,
+      "deepseek_v4_flash_failed": false,
+      "stepfun_3_5_flash_failed": false,
+      "glm_5_2_bailian_failed": false,
+      "kimi_k2_5_bailian_failed": false,
+      "minimax_m2_5_bailian_failed": false
+    },
+    {
+      "case_id": "CMP02-D6-02",
+      "qwen_local_1_5b_failed": false,
+      "qwen_local_7b_failed": false,
+      "deepseek_v4_flash_failed": false,
+      "stepfun_3_5_flash_failed": false,
+      "glm_5_2_bailian_failed": false,
+      "kimi_k2_5_bailian_failed": false,
+      "minimax_m2_5_bailian_failed": false
+    },
+    {
+      "case_id": "CMP02-D7-01",
+      "qwen_local_1_5b_failed": true,
+      "qwen_local_7b_failed": true,
+      "deepseek_v4_flash_failed": false,
+      "stepfun_3_5_flash_failed": false,
+      "glm_5_2_bailian_failed": false,
+      "kimi_k2_5_bailian_failed": true,
+      "minimax_m2_5_bailian_failed": false
+    },
+    {
+      "case_id": "CMP02-D7-02",
+      "qwen_local_1_5b_failed": false,
+      "qwen_local_7b_failed": false,
+      "deepseek_v4_flash_failed": false,
+      "stepfun_3_5_flash_failed": false,
+      "glm_5_2_bailian_failed": false,
+      "kimi_k2_5_bailian_failed": false,
+      "minimax_m2_5_bailian_failed": false
+    }
+  ],
+  "subject_stats": {
+    "qwen_local_7b": {
+      "valid": 14,
+      "failed": 3,
+      "unresolved": 0,
+      "fail_rate": 0.214,
+      "wilson_95": [
+        0.076,
+        0.476
+      ]
+    },
+    "deepseek_v4_flash": {
+      "valid": 14,
+      "failed": 0,
+      "unresolved": 0,
+      "fail_rate": 0.0,
+      "wilson_95": [
+        0.0,
+        0.215
+      ]
+    },
+    "minimax_m2_5_bailian": {
+      "valid": 14,
+      "failed": 1,
+      "unresolved": 0,
+      "fail_rate": 0.071,
+      "wilson_95": [
+        0.013,
+        0.315
+      ]
+    },
+    "qwen_local_1_5b": {
+      "valid": 14,
+      "failed": 4,
+      "unresolved": 0,
+      "fail_rate": 0.286,
+      "wilson_95": [
+        0.117,
+        0.546
+      ]
+    },
+    "glm_5_2_bailian": {
+      "valid": 14,
+      "failed": 0,
+      "unresolved": 0,
+      "fail_rate": 0.0,
+      "wilson_95": [
+        0.0,
+        0.215
+      ]
+    },
+    "stepfun_3_5_flash": {
+      "valid": 14,
+      "failed": 0,
+      "unresolved": 0,
+      "fail_rate": 0.0,
+      "wilson_95": [
+        0.0,
+        0.215
+      ]
+    },
+    "kimi_k2_5_bailian": {
+      "valid": 14,
+      "failed": 2,
+      "unresolved": 0,
+      "fail_rate": 0.143,
+      "wilson_95": [
+        0.04,
+        0.399
+      ]
+    }
+  },
+  "fail_rate_by_subject": {
+    "qwen_local_7b": 0.214,
+    "deepseek_v4_flash": 0.0,
+    "minimax_m2_5_bailian": 0.071,
+    "qwen_local_1_5b": 0.286,
+    "glm_5_2_bailian": 0.0,
+    "stepfun_3_5_flash": 0.0,
+    "kimi_k2_5_bailian": 0.143
+  },
+  "discriminative_power": 0.286
+}
