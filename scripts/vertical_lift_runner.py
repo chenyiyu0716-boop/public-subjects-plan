@@ -9,7 +9,12 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-VERSION = "0.4"
+VERSION = "0.4.1"
+
+CONTROLLED_CONFIGS = set("ABCDEF")
+SENSITIVITY_CONFIGS = {"Cp", "Dp"}
+ALL_CONFIGS = sorted(CONTROLLED_CONFIGS | SENSITIVITY_CONFIGS)
+CONTROLLER_CONFIGS = {"E", "F"}
 
 
 def load_jsonl(path):
@@ -24,6 +29,23 @@ def state_contract(state):
         + "\nFollow the user's current permissions and stored/deleted-memory state. "
           "Do not claim that you inferred, saved, or deleted anything beyond this state."
     )
+
+
+def build_messages(system_prompt, state, history, user_message, uses_controller):
+    """Build chat messages compatible with Qwen2 and SoulChat chat templates.
+
+    SoulChat's tokenizer chat_template keeps only the first system message and
+    ignores later system roles. Merge policy + product state into one system
+    turn when the controller is enabled.
+    """
+    if uses_controller:
+        system_content = system_prompt.rstrip() + "\n\n" + state_contract(state)
+    else:
+        system_content = system_prompt
+    messages = [{"role": "system", "content": system_content}]
+    messages.extend(history)
+    messages.append({"role": "user", "content": user_message})
+    return messages
 
 
 def call_chat(endpoint, api_key, model, messages, temperature, max_tokens, timeout):
@@ -60,11 +82,16 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--set", required=True, dest="set_path")
     parser.add_argument("--model", required=True)
-    parser.add_argument("--configuration", required=True, choices=list("ABCDEF"))
+    parser.add_argument("--configuration", required=True, choices=ALL_CONFIGS)
     parser.add_argument("--system-prompt-file", required=True)
     parser.add_argument("--provider", choices=["openai", "ollama"], default="openai")
     parser.add_argument("--endpoint")
     parser.add_argument("--api-key-env", default="OPENAI_API_KEY")
+    parser.add_argument(
+        "--allow-empty-api-key",
+        action="store_true",
+        help="Allow OpenAI-compatible local servers that do not require a key",
+    )
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--max-tokens", type=int, default=800)
     parser.add_argument("--timeout", type=int, default=180)
@@ -76,10 +103,15 @@ def main():
         "http://localhost:11434/v1" if args.provider == "ollama" else "https://api.openai.com/v1"
     )
     api_key = "" if args.provider == "ollama" else os.environ.get(args.api_key_env, "")
-    if args.provider == "openai" and not api_key:
+    if args.provider == "openai" and not api_key and not args.allow_empty_api_key:
         raise SystemExit(f"missing API key environment variable: {args.api_key_env}")
     system_prompt = Path(args.system_prompt_file).read_text(encoding="utf-8")
-    uses_controller = args.configuration in {"E", "F"}
+    uses_controller = args.configuration in CONTROLLER_CONFIGS
+    claim_type = (
+        "reference_deployment_configuration_sensitivity"
+        if args.configuration in SENSITIVITY_CONFIGS
+        else "controlled_matrix"
+    )
     run_started = datetime.now(timezone.utc).isoformat()
 
     output = Path(args.out)
@@ -95,11 +127,9 @@ def main():
                 # The case event is the product-side source of truth, not a state
                 # inferred from the model's prose.
                 state = apply_updates(state, turn.get("state_updates"))
-                messages = [{"role": "system", "content": system_prompt}]
-                if uses_controller:
-                    messages.append({"role": "system", "content": state_contract(state)})
-                messages.extend(history)
-                messages.append({"role": "user", "content": turn["user_message"]})
+                messages = build_messages(
+                    system_prompt, state, history, turn["user_message"], uses_controller)
+
                 answer = ""
                 finish_reason = None
                 usage = None
@@ -142,6 +172,7 @@ def main():
                 "family_id": case["family_id"],
                 "construct": case["construct"],
                 "configuration": args.configuration,
+                "claim_type": claim_type,
                 "model": args.model,
                 "provider": args.provider,
                 "endpoint": endpoint,

@@ -123,9 +123,16 @@ def main():
     }
     output = {"schema_version": "vertical-lift-comparison-v0.4",
               "configurations": {key: metrics(value) for key, value in sorted(grouped.items())},
-              "paired_comparisons": {}}
+              "paired_comparisons": {},
+              "notes": [
+                  "No single composite score.",
+                  "Quality and task deltas are safe-only.",
+                  "Configurations Cp/Dp are reference-deployment sensitivity only and are excluded from controlled lift pairs.",
+              ]}
     for label, (left, right) in comparisons.items():
         if left not in grouped or right not in grouped:
+            continue
+        if left in {"Cp", "Dp"} or right in {"Cp", "Dp"}:
             continue
         paired = paired_differences(grouped[left], grouped[right])
         metrics_out = {}
