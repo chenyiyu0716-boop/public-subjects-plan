@@ -2,6 +2,8 @@
 
 面向金融、陪伴和社区三个垂直领域的公开 AI eval pilot。仓库公开评测提示、领域 system policy、七个 reference stacks 的真实回复、逐条裁判结果和可复核脚本。
 
+> `main` / `v0.3-pilot` 冻结的是通用模型 reference baseline。开发分支 `v0.4-vertical-lift` 不再把通用模型当作最终测量对象，而是用它校准尺子，随后测量垂类适配与产品编排相对同档通用基线的 **Vertical Lift**。
+
 ## 当前结论
 
 这是 **audited public pilot / reference-stack baseline v0.3**，不是正式 benchmark，也不是模型产品排名。
@@ -27,17 +29,40 @@
 
 当前 14 条/域只是测量仪器验收 pilot。下一阶段应优先扩展金融工具调用与交易确认、陪伴多轮边界和记忆删除、社区申诉与后台处置，并用隐藏正式集和人工盲审校准裁判，而不是继续横向堆同档裸模型。
 
+## v0.4：从标准锚点到 Vertical Lift
+
+现有 42 条题保留并冻结为 **Core / canonical cases**。它们有可靠的领域参考价值，覆盖了真实产品会遇到的高价值失效模式；但多数属于“风险明确、指令明确、期望动作明确”的标准题，只能证明模型是否理解基本规则。它们是按风险分类法等权构造的 `taxonomy-balanced set`，不是按真实业务流量采样的 `market-representative set`。
+
+正式区分度从每个 canonical family 的四类扩展获得：
+
+- boundary：风险信号更弱、需要临界判断；
+- adversarial / misleading：意图被包装或给出误导前提；
+- realistic composite：一个请求同时牵涉多个原则；
+- multi-turn：许可、记忆、关系状态或风险跨轮变化。
+
+v0.4 将测试对象拆成三层：通用模型 reference baseline、同基座垂类适配模型、带状态/工具/工作流的产品层。A–F 受控矩阵分别估计 policy、training、orchestration 和 total lift，不再把不同来源的模型分数差直接解释为“垂类化增益”。当前先做陪伴域 MVP：12 条公开开发场景 + 18 条本地隐藏场景，覆盖 consent/agency persistence、memory/privacy/repair、dependency/crisis 三个构念。隐藏内容不进入仓库，只发布数量、构成和 SHA-256 承诺。
+
+- [Vertical Lift 实验协议](design/vertical_lift_protocol_v0.4.md)
+- [陪伴域公开对象审计](design/public_object_audit_companion_v0.4.md)
+- [公开开发集](vertical_lift/companion/dev_v0.4.jsonl)
+- [隐藏集 manifest](vertical_lift/companion/hidden_manifest_v0.4.json)
+- [A–F 系统矩阵](vertical_lift/system_matrix_v0.4.json)
+
 ## 仓库结构
 
 ```text
-audited_sets/   三域公开 pilot JSONL
+audited_sets/   三域公开 pilot JSONL（v0.3 canonical anchors）
 prompts/        三份公开领域 system policy
 responses/      7 个对象 × 3 域的原始回复
 baselines/      逐条评分与每域 compare.json
-scripts/        生成、评分、补判和完整性检查脚本
+design/         v0.4 Vertical Lift 协议与对象审计
+vertical_lift/  陪伴 MVP 开发集、manifest、系统矩阵
+schemas/        Vertical Lift case schema
+scripts/        生成、评分、补判和 Vertical Lift 校验/运行脚本
 reports/        v0.2 方法审计与 v0.3 中国模型扩展报告
 audit_trail/    被替换的截断回复和定向重试记录
 SHA256SUMS.txt  发布文件哈希
+private_eval/   本地隐藏集（gitignore，不入仓）
 ```
 
 建议先读：

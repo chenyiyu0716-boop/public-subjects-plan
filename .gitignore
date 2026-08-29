@@ -5,4 +5,12 @@ __pycache__/
 *.env
 *.key
 *.pem
-
+private_eval/
+*.safetensors
+*.bin
+*.gguf
+*.ggml
+.models/
+tmp/
+vertical_lift/results/
+.vlift-*/

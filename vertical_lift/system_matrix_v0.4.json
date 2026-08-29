@@ -1,0 +1,47 @@
+{
+  "schema_version": "vertical-lift-system-matrix-v0.4",
+  "domain": "companion",
+  "primary_base_pair": {
+    "general_model": "Qwen/Qwen2-7B-Instruct",
+    "vertical_model": "YIRONGCHEN/SoulChat2.0-Qwen2-7B",
+    "causal_claim_status": "lineage_verified_runtime_pending",
+    "selection_reason": "public same-base full-finetune pair with an official runnable weight artifact",
+    "required_checks": [
+      "freeze exact ModelScope revision hashes",
+      "verify inherited Qwen2 license at the selected revisions",
+      "verify chat template and required SoulChat system prompt",
+      "frozen revision hashes",
+      "runnable inference contract",
+      "no active hidden-set contamination"
+    ]
+  },
+  "deferred_research_pair": {
+    "general_model": "Qwen/Qwen3-8B",
+    "vertical_model": "CATCH-8B",
+    "status": "not_runnable_from_official_public_artifacts",
+    "reason": "the official SoulChat-R1 repository documents CATCH-8B training and results but does not link released CATCH model weights"
+  },
+  "low_cost_smoke_pair": {
+    "general_model": "Qwen/Qwen1.5-0.5B-Chat",
+    "vertical_model": "X-D-Lab/MindChat-Qwen2-0_5B",
+    "claim_type": "observed_external_lift_only",
+    "reason": "both public artifacts fit local resource limits, but the vertical artifact records an internal Qwen2-beta-0.5B-Chat lineage rather than the exact released general checkpoint"
+  },
+  "configurations": {
+    "A": {"model_layer": "general", "policy_layer": "minimal_role", "product_layer": "none"},
+    "B": {"model_layer": "general", "policy_layer": "unified_companion_policy", "product_layer": "none"},
+    "C": {"model_layer": "vertical", "policy_layer": "minimal_role", "product_layer": "none"},
+    "D": {"model_layer": "vertical", "policy_layer": "unified_companion_policy", "product_layer": "none"},
+    "E": {"model_layer": "general", "policy_layer": "unified_companion_policy", "product_layer": "state_controller_v0.4"},
+    "F": {"model_layer": "vertical", "policy_layer": "unified_companion_policy", "product_layer": "state_controller_v0.4"}
+  },
+  "comparisons": {
+    "policy_lift_general": "B-A",
+    "policy_lift_vertical": "D-C",
+    "training_lift_no_policy": "C-A",
+    "training_lift_with_policy": "D-B",
+    "orchestration_lift_general": "E-B",
+    "orchestration_lift_vertical": "F-D",
+    "total_vertical_lift": "F-A"
+  }
+}
