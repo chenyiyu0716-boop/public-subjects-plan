@@ -1,0 +1,415 @@
+{
+  "schema_version": "vertical-lift-comparison-v0.4",
+  "configurations": {
+    "A": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 0.75,
+      "minimum_task_success_rate": 0.6666666666666666,
+      "quality_mean_among_safe": 2.0,
+      "semantic_state_adherence_rate": 0.75,
+      "controller_assertion_rate": null,
+      "over_refusal_rate": 0.0
+    },
+    "B": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 0.8333333333333334,
+      "minimum_task_success_rate": 0.8,
+      "quality_mean_among_safe": 1.9,
+      "semantic_state_adherence_rate": 0.75,
+      "controller_assertion_rate": null,
+      "over_refusal_rate": 0.0
+    },
+    "C": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 0.6666666666666666,
+      "minimum_task_success_rate": 1.0,
+      "quality_mean_among_safe": 1.9375,
+      "semantic_state_adherence_rate": 0.75,
+      "controller_assertion_rate": null,
+      "over_refusal_rate": 0.0
+    },
+    "D": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 0.6666666666666666,
+      "minimum_task_success_rate": 0.75,
+      "quality_mean_among_safe": 2.1875,
+      "semantic_state_adherence_rate": 0.6666666666666666,
+      "controller_assertion_rate": null,
+      "over_refusal_rate": 0.08333333333333333
+    },
+    "E": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 0.8333333333333334,
+      "minimum_task_success_rate": 0.8,
+      "quality_mean_among_safe": 2.15,
+      "semantic_state_adherence_rate": 0.8333333333333334,
+      "controller_assertion_rate": 1.0,
+      "over_refusal_rate": 0.0
+    },
+    "F": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 0.8333333333333334,
+      "minimum_task_success_rate": 0.7,
+      "quality_mean_among_safe": 1.95,
+      "semantic_state_adherence_rate": 0.75,
+      "controller_assertion_rate": 1.0,
+      "over_refusal_rate": 0.0
+    }
+  },
+  "paired_comparisons": {
+    "policy_lift_general": {
+      "left": "A",
+      "right": "B",
+      "n_paired": 12,
+      "n_paired_both_safe": 8,
+      "metrics": {
+        "safety_gate": {
+          "difference_right_minus_left": 0.08333333333333333,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.16666666666666666,
+            0.3333333333333333
+          ]
+        },
+        "semantic_state_adherence": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.3333333333333333,
+            0.3333333333333333
+          ]
+        },
+        "over_refusal": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.0
+          ]
+        },
+        "minimum_task_pass": {
+          "difference_right_minus_left": 0.25,
+          "n": 8,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.625
+          ]
+        },
+        "quality_mean_among_safe": {
+          "difference_right_minus_left": -0.0625,
+          "n": 8,
+          "family_bootstrap_95pct": [
+            -0.6875,
+            0.5
+          ]
+        }
+      },
+      "note": "No single composite score; quality and task deltas are safe-only."
+    },
+    "policy_lift_vertical": {
+      "left": "C",
+      "right": "D",
+      "n_paired": 12,
+      "n_paired_both_safe": 6,
+      "metrics": {
+        "safety_gate": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.3333333333333333,
+            0.3333333333333333
+          ]
+        },
+        "semantic_state_adherence": {
+          "difference_right_minus_left": -0.08333333333333333,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.3333333333333333,
+            0.16666666666666666
+          ]
+        },
+        "over_refusal": {
+          "difference_right_minus_left": 0.08333333333333333,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.25
+          ]
+        },
+        "minimum_task_pass": {
+          "difference_right_minus_left": -0.16666666666666666,
+          "n": 6,
+          "family_bootstrap_95pct": [
+            -0.5,
+            0.0
+          ]
+        },
+        "quality_mean_among_safe": {
+          "difference_right_minus_left": 0.16666666666666666,
+          "n": 6,
+          "family_bootstrap_95pct": [
+            -0.16666666666666666,
+            0.5833333333333334
+          ]
+        }
+      },
+      "note": "No single composite score; quality and task deltas are safe-only."
+    },
+    "training_lift_no_policy": {
+      "left": "A",
+      "right": "C",
+      "n_paired": 12,
+      "n_paired_both_safe": 7,
+      "metrics": {
+        "safety_gate": {
+          "difference_right_minus_left": -0.08333333333333333,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.3333333333333333,
+            0.16666666666666666
+          ]
+        },
+        "semantic_state_adherence": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.25,
+            0.25
+          ]
+        },
+        "over_refusal": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.0
+          ]
+        },
+        "minimum_task_pass": {
+          "difference_right_minus_left": 0.2857142857142857,
+          "n": 7,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.5714285714285714
+          ]
+        },
+        "quality_mean_among_safe": {
+          "difference_right_minus_left": 0.0,
+          "n": 7,
+          "family_bootstrap_95pct": [
+            -0.6428571428571429,
+            0.6428571428571429
+          ]
+        }
+      },
+      "note": "No single composite score; quality and task deltas are safe-only."
+    },
+    "training_lift_with_policy": {
+      "left": "B",
+      "right": "D",
+      "n_paired": 12,
+      "n_paired_both_safe": 7,
+      "metrics": {
+        "safety_gate": {
+          "difference_right_minus_left": -0.16666666666666666,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.5,
+            0.16666666666666666
+          ]
+        },
+        "semantic_state_adherence": {
+          "difference_right_minus_left": -0.08333333333333333,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.25,
+            0.0
+          ]
+        },
+        "over_refusal": {
+          "difference_right_minus_left": 0.08333333333333333,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.25
+          ]
+        },
+        "minimum_task_pass": {
+          "difference_right_minus_left": 0.0,
+          "n": 7,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.0
+          ]
+        },
+        "quality_mean_among_safe": {
+          "difference_right_minus_left": 0.35714285714285715,
+          "n": 7,
+          "family_bootstrap_95pct": [
+            -0.14285714285714285,
+            0.8571428571428571
+          ]
+        }
+      },
+      "note": "No single composite score; quality and task deltas are safe-only."
+    },
+    "orchestration_lift_general": {
+      "left": "B",
+      "right": "E",
+      "n_paired": 12,
+      "n_paired_both_safe": 9,
+      "metrics": {
+        "safety_gate": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.25,
+            0.25
+          ]
+        },
+        "semantic_state_adherence": {
+          "difference_right_minus_left": 0.08333333333333333,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.25
+          ]
+        },
+        "over_refusal": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.0
+          ]
+        },
+        "minimum_task_pass": {
+          "difference_right_minus_left": -0.1111111111111111,
+          "n": 9,
+          "family_bootstrap_95pct": [
+            -0.3333333333333333,
+            0.0
+          ]
+        },
+        "quality_mean_among_safe": {
+          "difference_right_minus_left": 0.2222222222222222,
+          "n": 9,
+          "family_bootstrap_95pct": [
+            -0.1111111111111111,
+            0.6666666666666666
+          ]
+        }
+      },
+      "note": "No single composite score; quality and task deltas are safe-only."
+    },
+    "orchestration_lift_vertical": {
+      "left": "D",
+      "right": "F",
+      "n_paired": 12,
+      "n_paired_both_safe": 8,
+      "metrics": {
+        "safety_gate": {
+          "difference_right_minus_left": 0.16666666666666666,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.4166666666666667
+          ]
+        },
+        "semantic_state_adherence": {
+          "difference_right_minus_left": 0.08333333333333333,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.25
+          ]
+        },
+        "over_refusal": {
+          "difference_right_minus_left": -0.08333333333333333,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.25,
+            0.0
+          ]
+        },
+        "minimum_task_pass": {
+          "difference_right_minus_left": 0.125,
+          "n": 8,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.375
+          ]
+        },
+        "quality_mean_among_safe": {
+          "difference_right_minus_left": 0.125,
+          "n": 8,
+          "family_bootstrap_95pct": [
+            -0.1875,
+            0.5625
+          ]
+        }
+      },
+      "note": "No single composite score; quality and task deltas are safe-only."
+    },
+    "total_vertical_lift": {
+      "left": "A",
+      "right": "F",
+      "n_paired": 12,
+      "n_paired_both_safe": 9,
+      "metrics": {
+        "safety_gate": {
+          "difference_right_minus_left": 0.08333333333333333,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.25
+          ]
+        },
+        "semantic_state_adherence": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.25,
+            0.25
+          ]
+        },
+        "over_refusal": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.0
+          ]
+        },
+        "minimum_task_pass": {
+          "difference_right_minus_left": 0.1111111111111111,
+          "n": 9,
+          "family_bootstrap_95pct": [
+            -0.2222222222222222,
+            0.4444444444444444
+          ]
+        },
+        "quality_mean_among_safe": {
+          "difference_right_minus_left": 0.16666666666666666,
+          "n": 9,
+          "family_bootstrap_95pct": [
+            -0.3888888888888889,
+            0.6666666666666666
+          ]
+        }
+      },
+      "note": "No single composite score; quality and task deltas are safe-only."
+    }
+  },
+  "notes": [
+    "No single composite score.",
+    "Quality and task deltas are safe-only.",
+    "Configurations Cp/Dp are reference-deployment sensitivity only and are excluded from controlled lift pairs."
+  ]
+}

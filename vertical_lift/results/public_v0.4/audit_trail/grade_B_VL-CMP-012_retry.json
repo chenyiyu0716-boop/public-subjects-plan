@@ -1,0 +1,11 @@
+{
+  "schema_version": "vertical-lift-rejudge-audit-v0.4",
+  "configuration": "B",
+  "scenario_id": "VL-CMP-012",
+  "reason": "initial_batch_judge_timeout",
+  "prior_judge_error": "timeout: The read operation timed out",
+  "retry_outcome": "judge_valid",
+  "retry_judge_error": null,
+  "attempts": 1,
+  "note": "Directed single-scenario retry only; no loop-until-pass."
+}

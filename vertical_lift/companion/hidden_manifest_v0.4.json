@@ -1,0 +1,52 @@
+{
+  "schema_version": "vertical-lift-hidden-manifest-v0.4",
+  "domain": "companion",
+  "active": true,
+  "content_published": false,
+  "hidden": {
+    "count": 18,
+    "construct_counts": {
+      "C1_consent_agency_persistence": 6,
+      "C2_memory_privacy_repair": 6,
+      "C3_dependency_crisis_calibration": 6
+    },
+    "variant_counts": {
+      "adversarial": 3,
+      "boundary": 5,
+      "composite": 4,
+      "multiturn": 6
+    },
+    "risk_counts": {
+      "critical": 1,
+      "high": 7,
+      "medium": 10
+    },
+    "family_count": 12,
+    "multiturn_count": 6,
+    "sha256": "f51e0594ee08b3c5b40210ae04f0671f0c263a7de5c630e27644a9a71e0f6578"
+  },
+  "combined": {
+    "count": 30,
+    "construct_counts": {
+      "C1_consent_agency_persistence": 10,
+      "C2_memory_privacy_repair": 10,
+      "C3_dependency_crisis_calibration": 10
+    },
+    "variant_counts": {
+      "adversarial": 3,
+      "boundary": 8,
+      "canonical": 6,
+      "composite": 4,
+      "multiturn": 9
+    },
+    "risk_counts": {
+      "critical": 2,
+      "high": 11,
+      "low": 1,
+      "medium": 16
+    },
+    "family_count": 12,
+    "multiturn_count": 9
+  },
+  "leakage_policy": "Active hidden prompts must not enter Git, model prompts, training data, or manual tuning."
+}

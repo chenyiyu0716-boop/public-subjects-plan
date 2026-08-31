@@ -1,0 +1,22 @@
+{
+  "schema_version": "canonical-anchor-map-v0.4",
+  "status": "frozen",
+  "source_sets": {
+    "finance": "audited_sets/finance_pilot_v0.2.jsonl",
+    "companion": "audited_sets/companion_pilot_v0.2.jsonl",
+    "community": "audited_sets/community_pilot_v0.2.jsonl"
+  },
+  "total_anchors": 42,
+  "role": [
+    "sanity_check",
+    "minimum_deployment_contract",
+    "historical_regression_anchor"
+  ],
+  "representativeness": {
+    "taxonomy_balanced": true,
+    "market_representative": false,
+    "difficulty_note": "多数为明确风险、明确指令与明确期望动作的 canonical cases；正式区分度由 boundary、adversarial、composite 与 multiturn 变体承担。"
+  },
+  "mutation_policy": "Do not edit anchor semantics in place. Add a new version and preserve prior IDs/results."
+}
+

@@ -1,0 +1,117 @@
+{
+  "schema_version": "vertical-lift-system-matrix-v0.4",
+  "domain": "companion",
+  "primary_base_pair": {
+    "general_model": "Qwen/Qwen2-7B-Instruct",
+    "vertical_model": "YIRONGCHEN/SoulChat2.0-Qwen2-7B",
+    "source": "modelscope",
+    "causal_claim_status": "lineage_verified_runtime_authorized",
+    "selection_reason": "public same-base full-finetune pair with an official runnable weight artifact",
+    "required_checks": [
+      "freeze exact ModelScope file SHA-256 hashes",
+      "verify Apache-2.0 licenses at selected revisions",
+      "record chat templates and vLLM/CUDA/driver versions",
+      "runnable OpenAI-compatible inference contract",
+      "no active hidden-set contamination"
+    ]
+  },
+  "deferred_research_pair": {
+    "general_model": "Qwen/Qwen3-8B",
+    "vertical_model": "CATCH-8B",
+    "status": "not_runnable_from_official_public_artifacts",
+    "reason": "the official SoulChat-R1 repository documents CATCH-8B training and results but does not link released CATCH model weights"
+  },
+  "low_cost_smoke_pair": {
+    "status": "withdrawn_for_causal_experiment",
+    "general_model": "Qwen/Qwen1.5-0.5B-Chat",
+    "vertical_model": "X-D-Lab/MindChat-Qwen2-0_5B",
+    "claim_type": "observed_external_lift_only",
+    "reason": "lineage is insufficient for controlled training lift; not used in the authorized public A-F run"
+  },
+  "budget_guardrails": {
+    "currency": "CNY",
+    "hard_cap": 50,
+    "stop_near": 40,
+    "max_gpu_hours": 4,
+    "gpu_vram_gb": 24,
+    "local_ollama_models_untouched": true,
+    "local_partial_download_untouched": "/private/tmp/vlift-models.NU5qq3"
+  },
+  "configurations": {
+    "A": {
+      "model_layer": "general",
+      "policy_layer": "minimal_role",
+      "product_layer": "none",
+      "claim_type": "controlled_matrix",
+      "system_prompt_file": "vertical_lift/companion/minimal_role_v0.4.md"
+    },
+    "B": {
+      "model_layer": "general",
+      "policy_layer": "unified_companion_policy",
+      "product_layer": "none",
+      "claim_type": "controlled_matrix",
+      "system_prompt_file": "prompts/companion_reference_policy_v0.2.md"
+    },
+    "C": {
+      "model_layer": "vertical",
+      "policy_layer": "minimal_role",
+      "product_layer": "none",
+      "claim_type": "controlled_matrix",
+      "system_prompt_file": "vertical_lift/companion/minimal_role_v0.4.md"
+    },
+    "D": {
+      "model_layer": "vertical",
+      "policy_layer": "unified_companion_policy",
+      "product_layer": "none",
+      "claim_type": "controlled_matrix",
+      "system_prompt_file": "prompts/companion_reference_policy_v0.2.md"
+    },
+    "E": {
+      "model_layer": "general",
+      "policy_layer": "unified_companion_policy",
+      "product_layer": "state_controller_v0.4",
+      "claim_type": "controlled_matrix",
+      "system_prompt_file": "prompts/companion_reference_policy_v0.2.md"
+    },
+    "F": {
+      "model_layer": "vertical",
+      "policy_layer": "unified_companion_policy",
+      "product_layer": "state_controller_v0.4",
+      "claim_type": "controlled_matrix",
+      "system_prompt_file": "prompts/companion_reference_policy_v0.2.md"
+    },
+    "Cp": {
+      "model_layer": "vertical",
+      "policy_layer": "soulchat_official_rebt",
+      "product_layer": "none",
+      "claim_type": "reference_deployment_configuration_sensitivity",
+      "system_prompt_file": "vertical_lift/companion/soulchat_official_rebt_v0.4.md",
+      "note": "Not a controlled training lift; reports official SoulChat deployment prompt sensitivity only."
+    },
+    "Dp": {
+      "model_layer": "vertical",
+      "policy_layer": "companion_policy_plus_rebt_role",
+      "product_layer": "none",
+      "claim_type": "reference_deployment_configuration_sensitivity",
+      "system_prompt_file": "vertical_lift/companion/companion_policy_plus_rebt_role_v0.4.md",
+      "note": "Safety/product constraints outrank REBT role text. Not a controlled training lift."
+    }
+  },
+  "comparisons": {
+    "policy_lift_general": "B-A",
+    "policy_lift_vertical": "D-C",
+    "training_lift_no_policy": "C-A",
+    "training_lift_with_policy": "D-B",
+    "orchestration_lift_general": "E-B",
+    "orchestration_lift_vertical": "F-D",
+    "total_vertical_lift": "F-A"
+  },
+  "sensitivity_reports_only": ["Cp", "Dp"],
+  "inference_defaults": {
+    "temperature": 0.0,
+    "max_tokens": 800,
+    "max_model_len": 8192,
+    "engine": "vllm",
+    "openai_compatible": true
+  }
+}

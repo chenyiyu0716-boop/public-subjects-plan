@@ -1,0 +1,68 @@
+{
+  "schema_version": "vertical-lift-run-freeze-v0.4-fc",
+  "status": "public_dev_provisional_llm_judge_only",
+  "branch": "v0.4-vertical-lift",
+  "domains": [
+    "finance",
+    "community"
+  ],
+  "public_sets": {
+    "finance": "vertical_lift/finance/dev_v0.4.jsonl",
+    "community": "vertical_lift/community/dev_v0.4.jsonl"
+  },
+  "public_set_n": 12,
+  "hidden_set": "not_run",
+  "generation_completed_utc": "2026-08-31T06:10:00Z",
+  "cloud_cost_cny_approx": 4,
+  "instance_shutdown": true,
+  "git_head_at_generation": "65941bb",
+  "inference": {
+    "controlled_A_F": {
+      "engine": "vllm",
+      "engine_version": "0.6.6",
+      "model": "Qwen/Qwen2-7B-Instruct",
+      "temperature": 0.0,
+      "gpu_class": "RTX_4090D_24GB"
+    },
+    "Fg": {
+      "status": "infra_blocked",
+      "claim_type": "observed_external_lift_only",
+      "reason": "FinGPT LoRA on Qwen-7B-Chat collapses to im_end; adapter_config base=Qwen-7B"
+    },
+    "Gg": {
+      "engine": "transformers",
+      "model": "Qwen/Qwen3Guard-Gen-0.6B",
+      "claim_type": "observed_specialized_guard_only",
+      "note": "vLLM 0.6.6 incompatible; mapped to moderation_contract_v1"
+    }
+  },
+  "integrity": {
+    "finance_A_F": "72/72",
+    "finance_Fg": "0/12_infra_blocked",
+    "community_A_F": "72/72",
+    "community_Gg": "12/12"
+  },
+  "grading_plan": {
+    "authorized": true,
+    "judge_model": "qwen3.8-max",
+    "include": [
+      "finance_A_F",
+      "community_A_F",
+      "community_Gg"
+    ],
+    "exclude": [
+      "finance_Fg"
+    ],
+    "companion_results_untouched": true
+  },
+  "note": "Do not merge main. Do not claim Fg/Gg as causal training lift.",
+  "grading": {
+    "judge_model": "qwen3.8-max",
+    "judge_endpoint_class": "dashscope_compatible_openai_v1",
+    "graded_at_utc": "2026-08-31T10:22:45+00:00",
+    "finance_note": "A-F 72/72; Fg not graded (infra_blocked)",
+    "grade_valid": "72/72",
+    "compare": "vertical_lift/results/public_v0.4_finance/grades/compare_controlled.json",
+    "report": "reports/vertical_lift_v0.4_finance_community_provisional.md"
+  }
+}

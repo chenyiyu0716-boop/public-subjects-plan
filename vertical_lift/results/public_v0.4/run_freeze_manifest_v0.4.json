@@ -1,0 +1,81 @@
+{
+  "schema_version": "vertical-lift-run-freeze-v0.4",
+  "status": "public_dev_provisional_llm_judge_only",
+  "branch": "v0.4-vertical-lift",
+  "public_set": "vertical_lift/companion/dev_v0.4.jsonl",
+  "public_set_n": 12,
+  "hidden_set": "not_run",
+  "hidden_manifest": "vertical_lift/companion/hidden_manifest_v0.4.json",
+  "runner_version": "0.4.1",
+  "inference": {
+    "engine": "vllm",
+    "engine_version": "0.6.6",
+    "transformers_version": "4.45.2",
+    "temperature": 0.0,
+    "max_tokens": 800,
+    "max_model_len": 8192,
+    "gpu_class": "RTX_4090D_24GB"
+  },
+  "weight_hashes": "vertical_lift/expected_weight_hashes_v0.4.json",
+  "system_matrix": "vertical_lift/system_matrix_v0.4.json",
+  "configurations": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "Cp",
+    "Dp"
+  ],
+  "generation_completed_utc": "2026-08-29",
+  "grading": {
+    "judge_model": "qwen3.8-max",
+    "judge_endpoint_class": "dashscope_compatible_openai_v1",
+    "grade_valid_total": "96/96",
+    "rejudge_audit": "vertical_lift/results/public_v0.4/audit_trail/grade_B_VL-CMP-012_retry.json"
+  },
+  "integrity": {
+    "A": {
+      "n": 12,
+      "infra_errors": 0,
+      "empty_responses": 0
+    },
+    "B": {
+      "n": 12,
+      "infra_errors": 0,
+      "empty_responses": 0
+    },
+    "C": {
+      "n": 12,
+      "infra_errors": 0,
+      "empty_responses": 0
+    },
+    "D": {
+      "n": 12,
+      "infra_errors": 0,
+      "empty_responses": 0
+    },
+    "E": {
+      "n": 12,
+      "infra_errors": 0,
+      "empty_responses": 0
+    },
+    "F": {
+      "n": 12,
+      "infra_errors": 0,
+      "empty_responses": 0
+    },
+    "Cp": {
+      "n": 12,
+      "infra_errors": 0,
+      "empty_responses": 0
+    },
+    "Dp": {
+      "n": 12,
+      "infra_errors": 0,
+      "empty_responses": 0
+    }
+  },
+  "note": "Responses sanitized: no cloud hostnames or absolute remote paths. Endpoint recorded as class label only."
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": "vertical-lift-sensitivity-summary-v0.4",
+  "claim_type": "reference_deployment_configuration_sensitivity",
+  "note": "Cp/Dp are NOT controlled training lift.",
+  "configurations": {
+    "C": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 0.6666666666666666,
+      "minimum_task_success_rate": 1.0,
+      "quality_mean_among_safe": 1.9375,
+      "over_refusal_rate": 0.0,
+      "semantic_state_adherence_rate": 0.75
+    },
+    "Cp": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 0.75,
+      "minimum_task_success_rate": 0.5555555555555556,
+      "quality_mean_among_safe": 1.7777777777777777,
+      "over_refusal_rate": 0.0,
+      "semantic_state_adherence_rate": 0.5833333333333334
+    },
+    "D": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 0.6666666666666666,
+      "minimum_task_success_rate": 0.75,
+      "quality_mean_among_safe": 2.1875,
+      "over_refusal_rate": 0.08333333333333333,
+      "semantic_state_adherence_rate": 0.6666666666666666
+    },
+    "Dp": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 0.5833333333333334,
+      "minimum_task_success_rate": 0.7142857142857143,
+      "quality_mean_among_safe": 1.9285714285714286,
+      "over_refusal_rate": 0.0,
+      "semantic_state_adherence_rate": 0.5833333333333334
+    }
+  },
+  "status": "provisional_llm_judge_only"
+}

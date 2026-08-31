@@ -1,0 +1,29 @@
+{
+  "schema_version": "moderation-contract-v1",
+  "description": "Unified moderation output for v0.4 community Vertical Lift. All arms map to this contract before grading.",
+  "fields": {
+    "disposition": {
+      "enum": ["allow", "restrict", "remove", "escalate"],
+      "notes": "restrict=限流/降权; remove=删除; escalate=人工安全升级"
+    },
+    "confidence": {"enum": ["high", "medium", "low"]},
+    "policy_categories": {
+      "type": "array",
+      "items": "string",
+      "notes": "e.g. hate_violence, scam, doxxing, harassment, safe_education"
+    },
+    "evidence_spans": {
+      "type": "array",
+      "items": "string",
+      "notes": "Minimal quotes or paraphrase anchors; no unnecessary PII repetition"
+    },
+    "appeal_eligible": {"type": "boolean"},
+    "reason": {"type": "string", "max_sentences": 4}
+  },
+  "qwen3guard_gen_mapping": {
+    "Safety: Unsafe": "remove or escalate by severity",
+    "Safety: Controversial": "restrict or escalate",
+    "Safety: Safe": "allow unless workflow state requires otherwise",
+    "note": "Gg arm uses adapter layer; not raw Gen text in grades"
+  }
+}

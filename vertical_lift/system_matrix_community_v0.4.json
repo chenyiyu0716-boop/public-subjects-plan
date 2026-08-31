@@ -1,0 +1,95 @@
+{
+  "schema_version": "vertical-lift-system-matrix-v0.4",
+  "domain": "community",
+  "measurement_object": "community_moderation_system",
+  "note": "Moderation contract v1 JSON output; not free-form chat scoring.",
+  "primary_controlled_base": {
+    "model": "Qwen/Qwen2-7B-Instruct",
+    "source": "modelscope",
+    "causal_claim_status": "controlled_general_baseline_only"
+  },
+  "observed_specialized_guard": {
+    "model": "Qwen/Qwen3Guard-Gen-0.6B",
+    "lineage": "Qwen3 (not Qwen2-7B-Instruct)",
+    "claim_type": "observed_specialized_guard_only",
+    "configuration": "Gg",
+    "contract_adapter": "vertical_lift/community/moderation_contract_v1.json"
+  },
+  "configurations": {
+    "A": {
+      "model_layer": "general",
+      "policy_layer": "minimal_moderation_role",
+      "product_layer": "none",
+      "claim_type": "controlled_matrix",
+      "system_prompt_file": "vertical_lift/community/minimal_role_v0.4.md",
+      "response_mode": "moderation_v1"
+    },
+    "B": {
+      "model_layer": "general",
+      "policy_layer": "unified_community_policy",
+      "product_layer": "none",
+      "claim_type": "controlled_matrix",
+      "system_prompt_file": "prompts/community_reference_policy_v0.2.md",
+      "response_mode": "moderation_v1"
+    },
+    "C": {
+      "model_layer": "general",
+      "policy_layer": "minimal_moderation_role",
+      "product_layer": "moderation_context_controller_v0.4",
+      "claim_type": "controlled_matrix",
+      "system_prompt_file": "vertical_lift/community/minimal_role_v0.4.md",
+      "response_mode": "moderation_v1"
+    },
+    "D": {
+      "model_layer": "general",
+      "policy_layer": "unified_community_policy",
+      "product_layer": "moderation_context_controller_v0.4",
+      "claim_type": "controlled_matrix",
+      "system_prompt_file": "prompts/community_reference_policy_v0.2.md",
+      "response_mode": "moderation_v1"
+    },
+    "E": {
+      "model_layer": "general",
+      "policy_layer": "unified_community_policy",
+      "product_layer": "appeal_escalation_controller_v0.4",
+      "claim_type": "controlled_matrix",
+      "system_prompt_file": "prompts/community_reference_policy_v0.2.md",
+      "response_mode": "moderation_v1"
+    },
+    "F": {
+      "model_layer": "general",
+      "policy_layer": "unified_community_policy",
+      "product_layer": "full_moderation_workflow_controller_v0.4",
+      "claim_type": "controlled_matrix",
+      "system_prompt_file": "prompts/community_reference_policy_v0.2.md",
+      "response_mode": "moderation_v1"
+    },
+    "Gg": {
+      "model_layer": "qwen3guard_gen",
+      "policy_layer": "guard_native_plus_contract_mapper",
+      "product_layer": "none",
+      "claim_type": "observed_specialized_guard_only",
+      "response_mode": "moderation_v1",
+      "note": "Excluded from controlled training lift pairs"
+    }
+  },
+  "comparisons": {
+    "policy_lift": "B-A",
+    "context_lift_no_policy": "C-A",
+    "context_lift_with_policy": "D-B",
+    "workflow_lift_appeal": "E-D",
+    "total_moderation_stack": "F-A"
+  },
+  "sensitivity_reports_only": ["Gg"],
+  "constructs": [
+    "C1_contextual_policy_judgment",
+    "C2_proportionality_false_positive_control",
+    "C3_workflow_integrity_adversarial_resistance"
+  ],
+  "moderation_contract": "vertical_lift/community/moderation_contract_v1.json",
+  "inference_defaults": {
+    "temperature": 0.0,
+    "max_tokens": 512,
+    "response_mode": "moderation_v1"
+  }
+}
