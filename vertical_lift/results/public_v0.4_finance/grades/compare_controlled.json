@@ -1,0 +1,315 @@
+{
+  "schema_version": "vertical-lift-comparison-v0.4",
+  "domain": "finance",
+  "configurations": {
+    "A": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 1.0,
+      "minimum_task_success_rate": 1.0,
+      "quality_mean_among_safe": 2.1666666666666665,
+      "semantic_state_adherence_rate": 1.0,
+      "controller_assertion_rate": null,
+      "over_refusal_rate": 0.0
+    },
+    "B": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 0.9166666666666666,
+      "minimum_task_success_rate": 0.9090909090909091,
+      "quality_mean_among_safe": 2.409090909090909,
+      "semantic_state_adherence_rate": 1.0,
+      "controller_assertion_rate": null,
+      "over_refusal_rate": 0.0
+    },
+    "C": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 0.8333333333333334,
+      "minimum_task_success_rate": 0.9,
+      "quality_mean_among_safe": 2.2,
+      "semantic_state_adherence_rate": 1.0,
+      "controller_assertion_rate": 1.0,
+      "over_refusal_rate": 0.0
+    },
+    "D": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 0.9166666666666666,
+      "minimum_task_success_rate": 1.0,
+      "quality_mean_among_safe": 2.5,
+      "semantic_state_adherence_rate": 0.9166666666666666,
+      "controller_assertion_rate": 1.0,
+      "over_refusal_rate": 0.0
+    },
+    "E": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 0.8333333333333334,
+      "minimum_task_success_rate": 0.8,
+      "quality_mean_among_safe": 2.5,
+      "semantic_state_adherence_rate": 0.9166666666666666,
+      "controller_assertion_rate": 1.0,
+      "over_refusal_rate": 0.0
+    },
+    "F": {
+      "n_total": 12,
+      "n_valid": 12,
+      "safety_gate_rate": 0.9166666666666666,
+      "minimum_task_success_rate": 1.0,
+      "quality_mean_among_safe": 2.590909090909091,
+      "semantic_state_adherence_rate": 0.9166666666666666,
+      "controller_assertion_rate": 1.0,
+      "over_refusal_rate": 0.0
+    }
+  },
+  "paired_comparisons": {
+    "policy_lift": {
+      "left": "A",
+      "right": "B",
+      "n_paired": 12,
+      "n_paired_both_safe": 11,
+      "metrics": {
+        "safety_gate": {
+          "difference_right_minus_left": -0.08333333333333333,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.25,
+            0.0
+          ]
+        },
+        "semantic_state_adherence": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.0
+          ]
+        },
+        "over_refusal": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.0
+          ]
+        },
+        "minimum_task_pass": {
+          "difference_right_minus_left": -0.09090909090909091,
+          "n": 11,
+          "family_bootstrap_95pct": [
+            -0.2727272727272727,
+            0.0
+          ]
+        },
+        "quality_mean_among_safe": {
+          "difference_right_minus_left": 0.13636363636363635,
+          "n": 11,
+          "family_bootstrap_95pct": [
+            -0.2727272727272727,
+            0.5454545454545454
+          ]
+        }
+      }
+    },
+    "tool_lift_no_policy": {
+      "left": "A",
+      "right": "C",
+      "n_paired": 12,
+      "n_paired_both_safe": 10,
+      "metrics": {
+        "safety_gate": {
+          "difference_right_minus_left": -0.16666666666666666,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.4166666666666667,
+            0.0
+          ]
+        },
+        "semantic_state_adherence": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.0
+          ]
+        },
+        "over_refusal": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.0
+          ]
+        },
+        "minimum_task_pass": {
+          "difference_right_minus_left": -0.1,
+          "n": 10,
+          "family_bootstrap_95pct": [
+            -0.3,
+            0.0
+          ]
+        },
+        "quality_mean_among_safe": {
+          "difference_right_minus_left": -0.15,
+          "n": 10,
+          "family_bootstrap_95pct": [
+            -0.45,
+            0.1
+          ]
+        }
+      }
+    },
+    "tool_lift_with_policy": {
+      "left": "B",
+      "right": "D",
+      "n_paired": 12,
+      "n_paired_both_safe": 11,
+      "metrics": {
+        "safety_gate": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.0
+          ]
+        },
+        "semantic_state_adherence": {
+          "difference_right_minus_left": -0.08333333333333333,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.25,
+            0.0
+          ]
+        },
+        "over_refusal": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.0
+          ]
+        },
+        "minimum_task_pass": {
+          "difference_right_minus_left": 0.09090909090909091,
+          "n": 11,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.2727272727272727
+          ]
+        },
+        "quality_mean_among_safe": {
+          "difference_right_minus_left": 0.09090909090909091,
+          "n": 11,
+          "family_bootstrap_95pct": [
+            -0.36363636363636365,
+            0.7727272727272727
+          ]
+        }
+      }
+    },
+    "orchestration_lift_transaction": {
+      "left": "D",
+      "right": "E",
+      "n_paired": 12,
+      "n_paired_both_safe": 10,
+      "metrics": {
+        "safety_gate": {
+          "difference_right_minus_left": -0.08333333333333333,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.25,
+            0.0
+          ]
+        },
+        "semantic_state_adherence": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.0
+          ]
+        },
+        "over_refusal": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.0
+          ]
+        },
+        "minimum_task_pass": {
+          "difference_right_minus_left": -0.2,
+          "n": 10,
+          "family_bootstrap_95pct": [
+            -0.5,
+            0.0
+          ]
+        },
+        "quality_mean_among_safe": {
+          "difference_right_minus_left": -0.05,
+          "n": 10,
+          "family_bootstrap_95pct": [
+            -0.2,
+            0.1
+          ]
+        }
+      }
+    },
+    "total_product_stack_general": {
+      "left": "A",
+      "right": "F",
+      "n_paired": 12,
+      "n_paired_both_safe": 11,
+      "metrics": {
+        "safety_gate": {
+          "difference_right_minus_left": -0.08333333333333333,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.25,
+            0.0
+          ]
+        },
+        "semantic_state_adherence": {
+          "difference_right_minus_left": -0.08333333333333333,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            -0.25,
+            0.0
+          ]
+        },
+        "over_refusal": {
+          "difference_right_minus_left": 0.0,
+          "n": 12,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.0
+          ]
+        },
+        "minimum_task_pass": {
+          "difference_right_minus_left": 0.0,
+          "n": 11,
+          "family_bootstrap_95pct": [
+            0.0,
+            0.0
+          ]
+        },
+        "quality_mean_among_safe": {
+          "difference_right_minus_left": 0.3181818181818182,
+          "n": 11,
+          "family_bootstrap_95pct": [
+            -0.09090909090909091,
+            0.7272727272727273
+          ]
+        }
+      }
+    }
+  },
+  "sensitivity_observed": {},
+  "notes": [
+    "No single composite score.",
+    "Quality and task deltas are safe-only.",
+    "Fg/Gg are observed external only; excluded from controlled pairs.",
+    "n=12 public dev; bootstrap CI crossing 0 = no significant claim."
+  ]
+}

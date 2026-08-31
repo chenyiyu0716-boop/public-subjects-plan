@@ -1,8 +1,11 @@
 {
   "schema_version": "vertical-lift-run-freeze-v0.4-fc",
-  "status": "public_dev_generation_complete_grading_authorized",
+  "status": "public_dev_provisional_llm_judge_only",
   "branch": "v0.4-vertical-lift",
-  "domains": ["finance", "community"],
+  "domains": [
+    "finance",
+    "community"
+  ],
   "public_sets": {
     "finance": "vertical_lift/finance/dev_v0.4.jsonl",
     "community": "vertical_lift/community/dev_v0.4.jsonl"
@@ -42,9 +45,24 @@
   "grading_plan": {
     "authorized": true,
     "judge_model": "qwen3.8-max",
-    "include": ["finance_A_F", "community_A_F", "community_Gg"],
-    "exclude": ["finance_Fg"],
+    "include": [
+      "finance_A_F",
+      "community_A_F",
+      "community_Gg"
+    ],
+    "exclude": [
+      "finance_Fg"
+    ],
     "companion_results_untouched": true
   },
-  "note": "Do not merge main. Do not claim Fg/Gg as causal training lift."
+  "note": "Do not merge main. Do not claim Fg/Gg as causal training lift.",
+  "grading": {
+    "judge_model": "qwen3.8-max",
+    "judge_endpoint_class": "dashscope_compatible_openai_v1",
+    "graded_at_utc": "2026-08-31T10:22:45+00:00",
+    "finance_note": "A-F 72/72; Fg not graded (infra_blocked)",
+    "grade_valid": "72/72",
+    "compare": "vertical_lift/results/public_v0.4_finance/grades/compare_controlled.json",
+    "report": "reports/vertical_lift_v0.4_finance_community_provisional.md"
+  }
 }
