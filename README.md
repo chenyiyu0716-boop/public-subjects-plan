@@ -10,9 +10,36 @@
 
 - 公开 **12** 条 taxonomy-balanced dev 场景（`vertical_lift/companion/dev_v0.4.jsonl`）；hidden 18 **未运行**。
 - 因果对：Qwen2-7B-Instruct vs SoulChat2.0-Qwen2-7B（ModelScope 官方权重，hash 冻结）。
-- 受控矩阵 A–F + 敏感性 Cp/Dp；temperature=0；DashScope `qwen3.8-max` 盲评（**暂未人标校准**）。
+- 受控矩阵 A–F + 敏感性 Cp/Dp；temperature=0；DashScope `qwen3.8-max` 盲评（**provisional / LLM-judge-only**，见下节开放合作）。
 - **96/96** 有效 LLM 评分；完整产物见 [`vertical_lift/results/public_v0.4/`](vertical_lift/results/public_v0.4/)。
 - 暂定结论：所有配对 lift 的 bootstrap CI **均跨 0**；training / policy / orchestration 的方向性变化分布在不同指标上，**不得**表述为“垂类显著更强”。详见 [v0.4 公开暂定报告](reports/vertical_lift_v0.4_public_provisional.md)。
+
+## 人工校准状态与开放合作
+
+当前 v0.4 结果仅基于盲化的 LLM judge，尚未经过心理咨询、陪伴产品或 AI 安全领域专家的人工校准。因此，所有分数、Vertical Lift 点估计和置信区间均属于 **provisional / LLM-judge-only evidence**，不应解释为经过专家验证的产品安全结论或正式 benchmark 排名。
+
+项目目前缺少稳定的领域专家评审资源。我们选择公开这一限制，而不是用非专业人工标签替代专家校准，或将自动裁判结果包装为人工共识。
+
+我们欢迎以下背景的研究者和从业者参与协作：
+
+- 心理咨询、临床心理或心理健康支持；
+- 陪伴产品、信任与安全、危机干预；
+- LLM evaluation、AI safety 或 human–AI interaction；
+- 多轮对话、记忆、关系边界与用户自主性研究。
+
+计划中的人工校准工作包括：
+
+1. 盲审全部自动裁判判定的 hard-fail；
+2. 从其余结果中按配置、构念和场景类型分层抽样；
+3. 独立判断安全红线、最低任务完成、过度拒绝、回复质量和状态遵循；
+4. 计算人工评审者间一致性及人工与 LLM judge 的一致性；
+5. 在证据充分后发布单独的 human-calibrated 结果，不覆盖当前 provisional 历史记录。
+
+有意协作者可通过 [GitHub Issue](https://github.com/chenyiyu0716-boop/public-subjects-plan/issues) 联系。评审材料将隐藏模型和实验配置身份；公开测试集不包含真实用户记录。隐藏集在人工校准方案确定前保持未运行、未公开状态。
+
+在完成人工校准前，本项目最准确的定位仍是：
+
+> 一个公开、可复核的 Vertical Lift 测量协议与 public development pilot，而不是已经获得专家验证的正式垂类 benchmark。
 
 ## 当前结论
 
