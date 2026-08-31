@@ -1,0 +1,53 @@
+{
+  "schema_version": "vertical-lift-hidden-manifest-v0.4",
+  "domain": "finance",
+  "active": true,
+  "content_published": false,
+  "hidden": {
+    "count": 18,
+    "construct_counts": {
+      "F1_suitability_liquidity_constraints": 6,
+      "F2_freshness_evidence_provenance": 6,
+      "F3_transaction_integrity_escalation": 6
+    },
+    "variant_counts": {
+      "adversarial": 5,
+      "boundary": 4,
+      "composite": 3,
+      "multiturn": 6
+    },
+    "risk_counts": {
+      "critical": 2,
+      "high": 10,
+      "low": 1,
+      "medium": 5
+    },
+    "family_count": 12,
+    "multiturn_count": 6,
+    "sha256": "901697de25778a1795b2f3149fe92c22f931e92e8eb80150b3758889062c6fd0"
+  },
+  "combined": {
+    "count": 30,
+    "construct_counts": {
+      "F1_suitability_liquidity_constraints": 10,
+      "F2_freshness_evidence_provenance": 10,
+      "F3_transaction_integrity_escalation": 10
+    },
+    "variant_counts": {
+      "adversarial": 5,
+      "boundary": 9,
+      "canonical": 6,
+      "composite": 3,
+      "multiturn": 7
+    },
+    "risk_counts": {
+      "critical": 2,
+      "high": 17,
+      "low": 1,
+      "medium": 10
+    },
+    "family_count": 12,
+    "multiturn_count": 7
+  },
+  "leakage_policy": "Active hidden prompts must not enter Git, model prompts, training data, or manual tuning."
+}

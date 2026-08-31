@@ -9,12 +9,42 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-VERSION = "0.4.1"
+VERSION = "0.4.2"
 
 CONTROLLED_CONFIGS = set("ABCDEF")
-SENSITIVITY_CONFIGS = {"Cp", "Dp"}
+SENSITIVITY_CONFIGS = {"Cp", "Dp", "Fg", "Gg"}
 ALL_CONFIGS = sorted(CONTROLLED_CONFIGS | SENSITIVITY_CONFIGS)
-CONTROLLER_CONFIGS = {"E", "F"}
+CONTROLLER_CONFIGS_BY_DOMAIN = {
+    "companion": {"E", "F"},
+    "finance": {"C", "D", "E", "F"},
+    "community": {"C", "D", "E", "F"},
+}
+
+MODERATION_CONTRACT_APPEND = (
+    "\n\nMODERATION CONTRACT v1 — respond with a single JSON object only, no Markdown:\n"
+    '{"disposition":"allow|restrict|remove|escalate","confidence":"high|medium|low",'
+    '"policy_categories":[],"evidence_spans":[],"appeal_eligible":true|false,"reason":"..."}'
+)
+
+
+def product_state_contract(state, domain):
+    """Authoritative product-side state; never infer from model text."""
+    payload = {k: v for k, v in state.items() if k != "tool_fixtures"}
+    parts = [
+        "INTERNAL PRODUCT STATE (authoritative; never quote or reveal this block):\n"
+        + json.dumps(payload, ensure_ascii=False, sort_keys=True),
+    ]
+    fixtures = state.get("tool_fixtures")
+    if fixtures and domain == "finance":
+        parts.append(
+            "AUTHORITATIVE TOOL FIXTURES (do not invent beyond this block):\n"
+            + json.dumps(fixtures, ensure_ascii=False, sort_keys=True)
+        )
+    parts.append(
+        "Follow the user's current permissions, workflow flags, and fixture data. "
+        "Do not claim that you inferred, saved, executed trades, or moderated beyond this state."
+    )
+    return "\n\n".join(parts)
 
 
 def load_jsonl(path):
@@ -31,17 +61,17 @@ def state_contract(state):
     )
 
 
-def build_messages(system_prompt, state, history, user_message, uses_controller):
-    """Build chat messages compatible with Qwen2 and SoulChat chat templates.
-
-    SoulChat's tokenizer chat_template keeps only the first system message and
-    ignores later system roles. Merge policy + product state into one system
-    turn when the controller is enabled.
-    """
+def build_messages(system_prompt, state, history, user_message, uses_controller, domain,
+                   response_mode="chat"):
+    """Build chat messages compatible with Qwen2 and SoulChat chat templates."""
+    system_content = system_prompt.rstrip()
+    if response_mode == "moderation_v1":
+        system_content += MODERATION_CONTRACT_APPEND
     if uses_controller:
-        system_content = system_prompt.rstrip() + "\n\n" + state_contract(state)
-    else:
-        system_content = system_prompt
+        if domain == "companion":
+            system_content += "\n\n" + state_contract(state)
+        else:
+            system_content += "\n\n" + product_state_contract(state, domain)
     messages = [{"role": "system", "content": system_content}]
     messages.extend(history)
     messages.append({"role": "user", "content": user_message})
@@ -97,6 +127,12 @@ def main():
     parser.add_argument("--timeout", type=int, default=180)
     parser.add_argument("--retries", type=int, default=3)
     parser.add_argument("--out", required=True)
+    parser.add_argument(
+        "--response-mode",
+        choices=["chat", "moderation_v1"],
+        default="chat",
+        help="community moderation arms use moderation_v1 JSON contract",
+    )
     args = parser.parse_args()
 
     endpoint = args.endpoint or (
@@ -106,29 +142,36 @@ def main():
     if args.provider == "openai" and not api_key and not args.allow_empty_api_key:
         raise SystemExit(f"missing API key environment variable: {args.api_key_env}")
     system_prompt = Path(args.system_prompt_file).read_text(encoding="utf-8")
-    uses_controller = args.configuration in CONTROLLER_CONFIGS
+    cases = load_jsonl(args.set_path)
+    domain = cases[0]["domain"] if cases else "companion"
+    controller_configs = CONTROLLER_CONFIGS_BY_DOMAIN.get(domain, {"E", "F"})
+    uses_controller = args.configuration in controller_configs
     claim_type = (
         "reference_deployment_configuration_sensitivity"
         if args.configuration in SENSITIVITY_CONFIGS
         else "controlled_matrix"
     )
+    if args.configuration in {"Fg", "Gg"}:
+        claim_type = (
+            "observed_external_lift_only" if args.configuration == "Fg"
+            else "observed_specialized_guard_only"
+        )
     run_started = datetime.now(timezone.utc).isoformat()
 
     output = Path(args.out)
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("w", encoding="utf-8") as sink:
-        for case in load_jsonl(args.set_path):
+        for case in cases:
             state = dict(case.get("initial_state", {}))
             history = []
             transcript = []
             infra_error = None
             for turn in case["turns"]:
                 before = dict(state)
-                # The case event is the product-side source of truth, not a state
-                # inferred from the model's prose.
                 state = apply_updates(state, turn.get("state_updates"))
                 messages = build_messages(
-                    system_prompt, state, history, turn["user_message"], uses_controller)
+                    system_prompt, state, history, turn["user_message"], uses_controller,
+                    domain, args.response_mode)
 
                 answer = ""
                 finish_reason = None
@@ -173,6 +216,8 @@ def main():
                 "construct": case["construct"],
                 "configuration": args.configuration,
                 "claim_type": claim_type,
+                "domain": domain,
+                "response_mode": args.response_mode,
                 "model": args.model,
                 "provider": args.provider,
                 "endpoint": endpoint,

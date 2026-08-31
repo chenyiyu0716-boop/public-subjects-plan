@@ -97,7 +97,21 @@ def summarize(rows):
     }
 
 
-def validate_collection(public_rows, hidden_rows=None):
+DOMAIN_PREFIX = {
+    "companion": "VL-CMP",
+    "finance": "VL-FIN",
+    "community": "VL-COM",
+}
+
+
+def infer_domain(rows):
+    domains = {row["domain"] for row in rows}
+    if len(domains) != 1:
+        raise ValueError(f"mixed domains in set: {domains}")
+    return domains.pop()
+
+
+def validate_collection(public_rows, hidden_rows=None, domain=None):
     all_rows = list(public_rows) + list(hidden_rows or [])
     ids = [row["scenario_id"] for row in all_rows]
     if len(ids) != len(set(ids)):
@@ -106,16 +120,21 @@ def validate_collection(public_rows, hidden_rows=None):
     for row in all_rows:
         validate_row(row)
 
+    domain = domain or infer_domain(all_rows)
+    prefix = DOMAIN_PREFIX.get(domain)
+    if not prefix or not all(row["scenario_id"].startswith(prefix) for row in all_rows):
+        raise ValueError(f"scenario_id prefix mismatch for domain {domain}")
+
     if hidden_rows is not None:
         if len(public_rows) != 12 or len(hidden_rows) != 18 or len(all_rows) != 30:
-            raise ValueError("companion MVP requires 12 public + 18 hidden = 30 scenarios")
+            raise ValueError(f"{domain} MVP requires 12 public + 18 hidden = 30 scenarios")
         by_construct = defaultdict(list)
         for row in all_rows:
             by_construct[row["construct"]].append(row)
         if sorted(len(rows) for rows in by_construct.values()) != [10, 10, 10]:
-            raise ValueError("companion MVP requires 10 scenarios per construct")
+            raise ValueError(f"{domain} MVP requires 10 scenarios per construct")
         if any(len({r["family_id"] for r in rows}) != 4 for rows in by_construct.values()):
-            raise ValueError("companion MVP requires four families per construct")
+            raise ValueError(f"{domain} MVP requires four families per construct")
 
 
 def main():
@@ -123,11 +142,13 @@ def main():
     parser.add_argument("--public", required=True)
     parser.add_argument("--hidden")
     parser.add_argument("--manifest-out")
+    parser.add_argument("--domain", choices=sorted(DOMAIN_PREFIX))
     args = parser.parse_args()
 
     public_rows = load_jsonl(args.public)
     hidden_rows = load_jsonl(args.hidden) if args.hidden else None
-    validate_collection(public_rows, hidden_rows)
+    domain = args.domain or (infer_domain(public_rows + (hidden_rows or [])) if public_rows else None)
+    validate_collection(public_rows, hidden_rows, domain=domain)
 
     output = {"public": summarize(public_rows)}
     if hidden_rows is not None:
@@ -142,7 +163,7 @@ def main():
             raise ValueError("--manifest-out requires --hidden")
         manifest = {
             "schema_version": "vertical-lift-hidden-manifest-v0.4",
-            "domain": "companion",
+            "domain": domain,
             "active": True,
             "content_published": False,
             "hidden": output["hidden"],

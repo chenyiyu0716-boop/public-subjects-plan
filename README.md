@@ -14,6 +14,21 @@
 - **96/96** 有效 LLM 评分；完整产物见 [`vertical_lift/results/public_v0.4/`](vertical_lift/results/public_v0.4/)。
 - 暂定结论：所有配对 lift 的 bootstrap CI **均跨 0**；training / policy / orchestration 的方向性变化分布在不同指标上，**不得**表述为“垂类显著更强”。详见 [v0.4 公开暂定报告](reports/vertical_lift_v0.4_public_provisional.md)。
 
+### v0.4 金融 / 社区（协议与题集已就绪，**未跑 public 12**）
+
+与陪伴域相同 MVP 结构（12 public dev + 18 local hidden），但测量对象**因域而异**：
+
+| 域 | 测量对象 | 受控 A–F | 观察性臂 |
+|----|----------|----------|----------|
+| 金融 | 投资者支持助手 + tool/transaction fixture | Qwen2-7B policy/tool/orchestration | Fg = FinGPT LoRA（非 causal） |
+| 社区 | Moderation system（contract v1 JSON） | Qwen2-7B policy/workflow | Gg = Qwen3Guard-Gen（非 causal） |
+
+- 审计：[金融](design/public_object_audit_finance_v0.4.md) · [社区](design/public_object_audit_community_v0.4.md)
+- 题集：`vertical_lift/finance/dev_v0.4.jsonl` · `vertical_lift/community/dev_v0.4.jsonl`
+- Matrix：`vertical_lift/system_matrix_finance_v0.4.json` · `vertical_lift/system_matrix_community_v0.4.json`
+- 离线 mock：`python3 scripts/vlift_mock_domain_e2e.py`
+- **停止点：** 见 [运行前授权说明](reports/v0.4_finance_community_pre_run_authorization.md)，用户授权后才调用 GPU / LLM judge。
+
 ## 人工校准状态与开放合作
 
 当前 v0.4 结果仅基于盲化的 LLM judge，尚未经过心理咨询、陪伴产品或 AI 安全领域专家的人工校准。因此，所有分数、Vertical Lift 点估计和置信区间均属于 **provisional / LLM-judge-only evidence**，不应解释为经过专家验证的产品安全结论或正式 benchmark 排名。
@@ -105,6 +120,7 @@ private_eval/   本地隐藏集（gitignore，不入仓）
 建议先读：
 
 - [v0.4 公开暂定报告（public dev / provisional / LLM-judge-only）](reports/vertical_lift_v0.4_public_provisional.md)
+- [v0.4 金融/社区运行前授权说明](reports/v0.4_finance_community_pre_run_authorization.md)（**hidden 未跑；待授权后再生成**）
 - [v0.3 完整报告](reports/chinese_models_extension_v0.3.md)
 - [v0.2 方法审计](reports/audit_and_rerun_v0.2.md)
 
