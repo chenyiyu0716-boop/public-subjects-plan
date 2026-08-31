@@ -56,7 +56,7 @@ E/F 的 **`controller_assertion_rate = 100% (12/12)`** 表示：runner 注入的
 
 ## 解读（暂定，非 claim）
 
-1. **未证明**同档垂类微调显著更强；所有配对 lift 的 CI 均含 0。  
+1. **未证明**同档垂类微调在统计上可分离地“更强”；所有配对 lift 的 CI 均含 0 → 报告为**未检测到可分离差异**，点估计仅作方向性参考。  
 2. **Training、policy、orchestration 的收益可能分布在不同指标上**（例如 policy 抬 general 最低任务、orchestration 抬安全、training 在 minimal prompt 下抬任务但伴随安全点估计下降）。  
 3. **垂类训练可能伴随安全退化**：A→C、B→D 的安全门点估计均为负，虽 CI 跨 0，但方向值得 hidden 集与人标复核。  
 4. Cp/Dp 为部署敏感性，**不是** training lift。

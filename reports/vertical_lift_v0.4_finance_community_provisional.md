@@ -54,7 +54,7 @@
 | Orchestration D→E | 10 | 全部 CI **跨 0** |
 | Total stack A→F | 11 | 全部 CI **跨 0** |
 
-**不得**声称显著 policy / tool / orchestration lift。点估计上质量偶有上升（如 A 2.17→F 2.59），但 CI 含 0。
+**不得**声称已检测到可分离的 policy / tool / orchestration lift。点估计上质量偶有上升（如 A 2.17→F 2.59），但 CI 含 0；应表述为**当前 public-dev 切片未检测到可分离 lift**（方向性点估计仅供参考），不能写“没有 lift”。
 
 ### Fg（观察性，未盲评）
 
@@ -108,7 +108,7 @@ Policy→质量的单侧 CI 不跨 0 **仍属 provisional / n=12 / LLM-judge-onl
 
 ## 研究问题回答（暂定）
 
-- **金融：** 在本公开切片上，policy / tool / transaction 叠加**未**产生可复核的显著配对 lift（CI 均跨 0）。  
-- **社区：** policy 相对 minimal 在质量轴上出现探索性正方向（CI 不跨 0）；workflow/context 叠加未显示显著配对 lift。Gg 仅为观察轨。
+- **金融：** 在本公开切片上，policy / tool / transaction 叠加的配对 bootstrap CI 均跨 0 → **未检测到可分离 lift**（非“证明没有 lift”）。  
+- **社区：** policy 相对 minimal 在质量轴上出现探索性正方向（CI 不跨 0，n=12 多重比较，**不作正式显著性 claim**）；其余 workflow/context 比较未检测到可分离 lift。Gg 仅为观察轨。
 
 完整数值：`grades/compare_controlled.json`（两域各一份）。
