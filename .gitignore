@@ -12,5 +12,7 @@ private_eval/
 *.ggml
 .models/
 tmp/
-vertical_lift/results/
+vertical_lift/results/*
+!vertical_lift/results/public_v0.4/
+!vertical_lift/results/public_v0.4/**
 .vlift-*/

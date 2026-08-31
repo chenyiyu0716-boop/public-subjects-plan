@@ -2,7 +2,17 @@
 
 面向金融、陪伴和社区三个垂直领域的公开 AI eval pilot。仓库公开评测提示、领域 system policy、七个 reference stacks 的真实回复、逐条裁判结果和可复核脚本。
 
-> `main` / `v0.3-pilot` 冻结的是通用模型 reference baseline。开发分支 `v0.4-vertical-lift` 不再把通用模型当作最终测量对象，而是用它校准尺子，随后测量垂类适配与产品编排相对同档通用基线的 **Vertical Lift**。
+> `main` / `v0.3-pilot` 冻结的是通用模型 reference baseline。开发分支 **`v0.4-vertical-lift`** 测量同基座垂类适配与产品编排相对通用基线的 **Vertical Lift**（**未合并 main**）。
+
+## v0.4 陪伴域公开开发集（`public dev` / `provisional` / `LLM-judge-only`）
+
+**不是**正式 benchmark，**不是**产品排名，**不是** hidden 集结果。
+
+- 公开 **12** 条 taxonomy-balanced dev 场景（`vertical_lift/companion/dev_v0.4.jsonl`）；hidden 18 **未运行**。
+- 因果对：Qwen2-7B-Instruct vs SoulChat2.0-Qwen2-7B（ModelScope 官方权重，hash 冻结）。
+- 受控矩阵 A–F + 敏感性 Cp/Dp；temperature=0；DashScope `qwen3.8-max` 盲评（**暂未人标校准**）。
+- **96/96** 有效 LLM 评分；完整产物见 [`vertical_lift/results/public_v0.4/`](vertical_lift/results/public_v0.4/)。
+- 暂定结论：所有配对 lift 的 bootstrap CI **均跨 0**；training / policy / orchestration 的方向性变化分布在不同指标上，**不得**表述为“垂类显著更强”。详见 [v0.4 公开暂定报告](reports/vertical_lift_v0.4_public_provisional.md)。
 
 ## 当前结论
 
@@ -56,7 +66,7 @@ prompts/        三份公开领域 system policy
 responses/      7 个对象 × 3 域的原始回复
 baselines/      逐条评分与每域 compare.json
 design/         v0.4 Vertical Lift 协议与对象审计
-vertical_lift/  陪伴 MVP 开发集、manifest、系统矩阵
+vertical_lift/  陪伴 MVP 开发集、manifest、系统矩阵、public_v0.4 公开产物
 schemas/        Vertical Lift case schema
 scripts/        生成、评分、补判和 Vertical Lift 校验/运行脚本
 reports/        v0.2 方法审计与 v0.3 中国模型扩展报告
@@ -67,6 +77,7 @@ private_eval/   本地隐藏集（gitignore，不入仓）
 
 建议先读：
 
+- [v0.4 公开暂定报告（public dev / provisional / LLM-judge-only）](reports/vertical_lift_v0.4_public_provisional.md)
 - [v0.3 完整报告](reports/chinese_models_extension_v0.3.md)
 - [v0.2 方法审计](reports/audit_and_rerun_v0.2.md)
 
